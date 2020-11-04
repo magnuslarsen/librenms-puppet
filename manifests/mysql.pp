@@ -22,38 +22,6 @@ class librenms::mysql {
 
   $mysqld = deep_merge($sane_default, $librenms::mysql_configuration)
 
-  $managed_dirs = [
-    '/var/lib/mysql', # datadir (default)
-    $mysqld['innodb_data_home_dir'],
-    $mysqld['innodb_log_group_home_dir'],
-    $mysqld['tmpdir'],
-  ]
-
-  $managed_dirs.each | $dir | {
-    exec { "${dir}-managed_dir-mkdir":
-      command => "/bin/mkdir -p ${dir}",
-      unless  => "/usr/bin/dpkg -s ${librenms::mysql_server_package_name}",
-      notify  =>  Exec["${dir}-managed_dir-chmod"],
-      before  =>  Class['mysql::server'],
-    }
-    exec { "${dir}-managed_dir-chmod":
-      command     => "/bin/chmod 777 ${dir}",
-      refreshonly => true,
-    }
-  }
-
-  # Fix permission after Mysql install
-  $managed_dirs.each | $_dir | {
-    file { $_dir:
-      ensure  => directory,
-      mode    => '0700',
-      owner   => 'mysql',
-      group   => 'mysql',
-      require =>  Class['mysql::server'],
-    }
-  }
-  # End of Mysql install fix
-
   class { 'mysql::server':
     package_name            => $librenms::mysql_server_package_name,
     package_ensure          => $librenms::mysql_server_package_ensure,
