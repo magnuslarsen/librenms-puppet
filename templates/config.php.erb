@@ -1,0 +1,39 @@
+<?php
+## THIS FILE IS MANAGED BY PUPPET ##
+
+# Database config
+$config['db_host'] = 'localhost';
+$config['db_user'] = '<%= scope['librenms::mysql_librenms_username'] %>';
+$config['db_pass'] = '<%= scope['librenms::mysql_librenms_password'] %>';
+$config['db_name'] = 'librenms';
+$config['db']['extension'] = "mysqli";
+
+# The user LibreNMS will run as
+$config['user'] = '<%= scope['librenms::librenms_owner'] %>';
+
+# This should *only* be set if you want to *force* a particular hostname/port
+# It will prevent the web interface being usable form any other hostname
+$config['base_url'] = "/";
+
+# The installation directory path
+$config['install_dir'] = "<%= scope['librenms::vcs_root_dir'] %>";
+
+# Enable this to use rrdcached. Be sure rrd_dir is within the rrdcached dir
+# and that your web server has permission to talk to rrdcached.
+$config['rrdcached'] = "unix:<%= scope['librenms::rrdcached_socket_file'] %>";
+
+# Default community
+$config['snmp']['community'] = array('<%= scope['librenms::snmp_ro_community'] %>');
+
+# Current version of rrd_tool
+$config['rrdtool_version'] = '<%= @rrd_version %>';
+
+### Pollers
+<% scope['librenms::config_override_pollers'].each do |key, value| -%>
+$config['poller_modules']['<%= key %>'] = <%= value %>;
+<% end %>
+
+### Raw input
+<% scope['librenms::librenms::formatted_raw_input'].each do |key, value| -%>
+<%= key %> = <%= value %>;
+<% end %>

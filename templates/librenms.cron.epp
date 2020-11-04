@@ -1,0 +1,28 @@
+<%- |
+  Boolean $testssl_enabled,
+  Boolean $weathermap_enabled,
+  Integer $discover_threads,
+  Integer $poller_threads,
+  String  $librenms_user,
+  String  $vcs_root,
+| -%>
+## THIS FILE IS MANAGED BY PUPPET ##
+# Main LibreNMS scripts and pollers
+33   */6  * * *   <%= $librenms_user %>    <%= $vcs_root %>/cronic <%= $vcs_root %>/discovery-wrapper.py <%= $discover_threads %>
+*/5  *    * * *   <%= $librenms_user %>    <%= $vcs_root %>/discovery.php -h new >> /dev/null 2>&1
+*/5  *    * * *   <%= $librenms_user %>    <%= $vcs_root %>/cronic <%= $vcs_root %>/poller-wrapper.py <%= $poller_threads %>
+*    *    * * *   <%= $librenms_user %>    <%= $vcs_root %>/alerts.php >> /dev/null 2>&1
+*/5  *    * * *   <%= $librenms_user %>    <%= $vcs_root %>/poll-billing.php >> /dev/null 2>&1
+01   *    * * *   <%= $librenms_user %>    <%= $vcs_root %>/billing-calculate.php >> /dev/null 2>&1
+*/5  *    * * *   <%= $librenms_user %>    <%= $vcs_root %>/check-services.php >> /dev/null 2>&1
+15   0    * * *   <%= $librenms_user %>    <%= $vcs_root %>/daily.sh >> /dev/null 2>&1
+
+<% if $weathermap_enabled { -%>
+# Plugin: Weathermap
+*/5  *    * * *   <%= $librenms_user %>    <%= $vcs_root %>/html/plugins/Weathermap/map-poller.php >> /dev/null 2>&1
+<% } -%>
+
+<% if $testssl_enabled { -%>
+# Plugin: TestSSL
+0    7    * * *   <%= $librenms_user %>    find <%= $vcs_root %>/html/plugins/TestSSL/tmp/* -type f -mtime +7 -delete >> /dev/null 2>&1
+<% } -%>

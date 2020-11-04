@@ -1,0 +1,42 @@
+<%- |
+  String $fqdn,
+| -%>
+<?php
+  $no_refresh = true;
+  $pagetitle[] = 'TestSSL';
+?>
+
+<h2> TestSSL </h2>
+<p>
+  TestSSL test the SSL connection to a given server.
+  </br></br>
+  Due to the nature of <a href="https://github.com/drwetter/testssl.sh">testssl.sh</a>, the output will be shown in full, after the script has executed.
+  </br>
+  This means, that the output will take a couple of minutes to be shown. Stay strong!
+</p>
+<form class="form-horizontal" method="POST">
+  <?php echo csrf_field() ?>
+
+  <br />
+  <h3>TestSSL Input</h3>
+  <div class="input-group">
+    <input type="text" class="form-control" name="text-input" id="input-parameter" placeholder="<%= $fqdn %>:443">
+    <span class="input-group-btn">
+      <button type="submit" name="btn-query" id="btn-query" class="btn btn-primary">Test!</button>
+    </span>
+  </div>
+</form>
+<br />
+
+<?php
+if (isset($_POST["text-input"]) && !empty($_POST["text-input"])) {
+  $script_root = dirname(__FILE__);
+
+  $tmpfile = tempnam($script_root . "/tmp/", "");
+
+  shell_exec($script_root . "/testssl.sh --warnings batch --ip one --color 3 --htmlfile " . $tmpfile . " " . escapeshellarg($_POST["text-input"]) . ' 2>&1');
+  readfile($tmpfile);
+} else {
+  echo "";
+}
+?>

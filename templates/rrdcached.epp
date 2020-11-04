@@ -1,0 +1,20 @@
+<%- |
+  String $vcs_dir,
+  String $group,
+  String $owner,
+  String $pid_file,
+  String $socket_file,
+| -%>
+## THIS FILE IS MANAGED BY PUPPET ##
+BASE_OPTIONS="-B -F -R"
+BASE_PATH=<%= $vcs_dir %>/rrd/
+DAEMON_GROUP=<%= $group %>
+DAEMON_USER=<%= $owner %>
+DAEMON=/usr/bin/rrdcached
+JOURNAL_PATH=/var/lib/rrdcached/journal/
+PIDFILE=<%= $pid_file %>
+SOCKFILE=<%= $socket_file %>
+SOCKGROUP=<%= $group %>
+WRITE_JITTER=1800
+WRITE_THREADS=4
+WRITE_TIMEOUT=1800

@@ -1,0 +1,79 @@
+{
+  "name": "mightp-librenms",
+  "version": "0.1.0",
+  "author": "Magnus Larsen",
+  "summary": "A module to install and manage LibreNMS",
+  "license": "Apache-2.0",
+  "source": "<link_to_git>",
+  "dependencies": [
+    {
+      "name": "puppetlabs/mysql",
+      "version_requirement": ">= 10.0.0"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 5.0.0"
+    },
+    {
+      "name": "puppet/php",
+      "version_requirement": ">= 7.0.0"
+    },
+    {
+      "name": "treydock/oxidized",
+      "version_requirement": ">= 0.7.0"
+    },
+    {
+      "name": "puppet/snmp",
+      "version_requirement": ">= 4.1.0"
+    },
+    {
+      "name": "puppetlabs/vcsrepo",
+      "version_requirement": ">= 3.0.0"
+    }
+
+  ],
+  "operatingsystem_support": [{
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "8"
+      ]
+    },
+    {
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "9"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "18.04"
+      ]
+    }
+  ],
+  "requirements": [{
+    "name": "puppet",
+    "version_requirement": ">= 4.10.0 < 7.0.0"
+  }],
+  "pdk-version": "1.14.1",
+  "template-url": "pdk-default#1.14.1",
+  "template-ref": "1.14.1-0-g0b5b39b"
+}
