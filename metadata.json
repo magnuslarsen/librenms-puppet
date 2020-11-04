@@ -1,6 +1,6 @@
 {
   "name": "mightp-librenms",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Magnus Larsen",
   "summary": "A module to install and manage LibreNMS",
   "license": "Apache-2.0",
