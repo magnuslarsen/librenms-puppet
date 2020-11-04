@@ -1,10 +1,12 @@
 {
   "name": "mightp-librenms",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Magnus Larsen",
   "summary": "A module to install and manage LibreNMS",
   "license": "Apache-2.0",
-  "source": "<link_to_git>",
+  "source": "https://github.com/magnuslarsen/librenms-puppet",
+  "project_page": "https://github.com/magnuslarsen/librenms-puppet",
+  "issues_url": "https://github.com/magnuslarsen/librenms-puppet/is",
   "dependencies": [
     {
       "name": "puppetlabs/mysql",
@@ -30,9 +32,9 @@
       "name": "puppetlabs/vcsrepo",
       "version_requirement": ">= 3.0.0"
     }
-
   ],
-  "operatingsystem_support": [{
+  "operatingsystem_support": [
+    {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
         "7"
@@ -69,10 +71,12 @@
       ]
     }
   ],
-  "requirements": [{
-    "name": "puppet",
-    "version_requirement": ">= 4.10.0 < 7.0.0"
-  }],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.10.0 < 7.0.0"
+    }
+  ],
   "pdk-version": "1.14.1",
   "template-url": "pdk-default#1.14.1",
   "template-ref": "1.14.1-0-g0b5b39b"
