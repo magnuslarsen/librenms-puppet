@@ -146,7 +146,7 @@ class librenms::web_services {
 
   # Enable the monitoring pages, if specified
   if $librenms::nginx_enable_mon_sites {
-    file { '/etc/nginx/sites-enabled/monitor_pages.conf':
+    file { '/etc/nginx/sites-available/monitor_pages.conf':
       ensure  => file,
       content => file("${module_name}/monitor_pages.conf"),
     }
