@@ -160,6 +160,8 @@
 # @param snmp_trap_ensure                The ensure value for the snmp trap daemon
 # @param snmp_trap_mib_dirs              An array of directories to load mibs from (if empty, `${librenms::vcs_root_dir}/mibs` will be selected)
 # @param snmp_trap_mibs                  An array of mibs to load (has to be loaded in $snmp_trap_mib_dirs)
+# @param snmp_varnet_group               The group used for /var/net/snmp
+# @param snmp_varnet_owner               The owner used for /var/net/snmp
 # @param testssl_enabled                 Whether to enable the TestSSL plugin for LibreNMS or not
 # @param vcs_branch                      The LibreNMS branch to follow
 # @param vcs_ensure                      The ensure value for the LibreNMS vcsrepo
@@ -198,6 +200,8 @@ class librenms(
   Optional[String]      $import_mysqldump            = undef,
   Optional[String]      $oxidized_auth_token         = 'SetThisToYourAuthToken!',
   Optional[String]      $snmp_contact                = undef,
+  Optional[String]      $snmp_varnet_group           = undef,
+  Optional[String]      $snmp_varnet_owner           = undef,
   String                $librenms_group              = 'librenms',
   String                $librenms_owner              = 'librenms',
   String                $mysql_client_package_ensure = 'latest',

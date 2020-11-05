@@ -32,6 +32,8 @@ class librenms::snmp {
       "default ${librenms::vcs_root_dir}/snmptrap.php",
     ],
     disable_authorization => 'yes',
+    varnetsnmp_owner      => $librenms::snmp_varnet_owner,
+    varnetsnmp_group      => $librenms::snmp_varnet_group,
   }
 
   file { '/etc/systemd/system/snmptrapd.service.d/':
